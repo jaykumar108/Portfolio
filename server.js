@@ -48,7 +48,7 @@ const contactSchema = new mongoose.Schema({
 const Contact = mongoose.model("Contact", contactSchema);
 
 // Routes
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.sendFile(path.join(__dirname, "VIEWS", "index.html"));
 });
 
