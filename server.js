@@ -52,7 +52,7 @@ app.get("/", (req, res) => {
 app.get("/admin.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "admin.html"));
 });
-app.get("/dashboard.html", (req, res) => {
+app.get("/jhufdyrbbfh874hhyehfg", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "dashboard.html"));
 });
 app.get("/thank.html", (req, res) => {
