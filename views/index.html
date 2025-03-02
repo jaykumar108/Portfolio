@@ -202,6 +202,41 @@
     }
 
 </script>
+<script>
+    
+    <script>
+    document.querySelector("form").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        let formData = new FormData(this);
+        let jsonData = {};
+        formData.forEach((value, key) => (jsonData[key] = value));
+
+        try {
+            let response = await fetch("/submit-form", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(jsonData),
+            });
+
+            if (response.ok) {
+                document.getElementById("msg").innerText = "Message sent successfully!";
+                this.reset();
+                setTimeout(() => {
+                    window.location.href = "/thank.html";
+                }, 1500);
+            } else {
+                document.getElementById("msg").innerText = "Error sending message.";
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("msg").innerText = "Something went wrong!";
+        }
+    });
+</script>
+
+    
+</script>
 
 </body>
 </html>
