@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "Public")));
+app.use(express.static(path.join(__dirname, "public")));
 
 // DATABASE CONNECTION
 mongoose
@@ -24,8 +24,6 @@ const contactSchema = new mongoose.Schema({
   email: String,
   mobile: String,
   message: String,
-
-  // Date & Time Stamp
   date: {
     type: String,
     default: () => {
@@ -47,15 +45,21 @@ const contactSchema = new mongoose.Schema({
 
 const Contact = mongoose.model("Contact", contactSchema);
 
-// Routes
+// Serve HTML Pages
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "index.html"));
 });
-
+app.get("/admin.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "admin.html"));
+});
+app.get("/dashboard.html", (req, res) => {
+  res.sendFile(path.join(__dirname, "views", "dashboard.html"));
+});
 app.get("/thank.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "thank.html"));
 });
 
+// FORM SUBMISSION ROUTE
 app.post("/submit-form", async (req, res) => {
   const { name, email, mobile, message } = req.body;
   const newContact = new Contact({ name, email, mobile, message });
@@ -67,6 +71,17 @@ app.post("/submit-form", async (req, res) => {
   } catch (error) {
     console.error("❌ Error saving data: ", error);
     res.status(500).send("Error saving data.");
+  }
+});
+
+// FETCH DATA FOR ADMIN PANEL
+app.get("/get-submissions", async (req, res) => {
+  try {
+    const submissions = await Contact.find({}).sort({ date: -1 });
+    res.json(submissions);
+  } catch (error) {
+    console.error("❌ Error fetching data:", error);
+    res.status(500).send("Error fetching data.");
   }
 });
 

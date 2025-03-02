@@ -1,0 +1,33 @@
+	<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+        input { padding: 10px; margin: 10px; }
+        button { padding: 10px 15px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h2>Admin Panel Login</h2>
+    <input type="password" id="admin-pass" placeholder="Enter Admin Code">
+    <button onclick="checkPassword()">Login</button>
+
+    <script>
+        function checkPassword() {
+            const password = document.getElementById("admin-pass").value;
+            const correctPassword = "1234"; // Change this password for security
+
+            if (password === correctPassword) {
+                localStorage.setItem("adminAuth", "true");
+                window.location.href = "/dashboard.html";
+            } else {
+                alert("Incorrect Password!");
+            }
+        }
+    </script>
+</body>
+</html>
+		
