@@ -49,7 +49,7 @@ const Contact = mongoose.model("Contact", contactSchema);
 
 // Routes
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "VIEWS", "portfolio.html"));
+  res.sendFile(path.join(__dirname, "VIEWS", "index.html"));
 });
 
 app.get("/thank.html", (req, res) => {
