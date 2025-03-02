@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portflio</title>
+    <title>Portfolio</title>
     <link rel="stylesheet" href="portflio.css">
     <link rel="icon" type="image/png" href="images/logojay.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -144,7 +144,7 @@
     <div class="container">
         <div class="row">
             <div class="contact-left">
-                <h1 class="sub-title"> Contact Me</h1>
+                <h1 class="sub-title">Contact Me</h1>
                 <p><i class="fa fa-paper-plane"></i> jaysharmabnk120@gmail.com</p>
                 <p><i class="fa fa-phone-square"></i> +91 </p>
                 <div class="social-icons">
@@ -157,10 +157,11 @@
                 <a href="#" download class="btn btn2">Download CV</a>
             </div>
             <div class="contact-right">
-                <form name="submit-to-google-sheet">
-                    <input type="text" name="Name" id="" placeholder="Your Name" required>
-                    <input type="email" name="email" id="" placeholder="Enter Email" required>
-                    <textarea name="message" id="" cols="30" rows="10" placeholder="Your message"></textarea>
+                <form action="/submit-form" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Enter Email" required>
+                    <input type="text" name="mobile" placeholder="Your Mobile Number" required>
+                    <textarea name="message" cols="30" rows="10" placeholder="Your message"></textarea>
                     <button type="submit" class="btn3">Submit</button>
                 </form>
                 <span id="msg"></span>
@@ -168,9 +169,10 @@
         </div>
     </div>
     <div class="copyright">
-        <p>Copyright 2024 &copy; Jay Kumar <i class="fa fa-heart" ></i></p>
+        <p>Copyright 2024 &copy; Jay Kumar <i class="fa fa-heart"></i></p>
     </div>
 </div>
+
 
 
 
@@ -200,23 +202,6 @@
     }
 
 </script>
-<script>
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbx-e1Z91yu6amgMT_tZMNezMMxRDe6qG-bMRZtUnreWrf4KaTIYbE5JDGHufMqcwoMupw/exec'
-    const form = document.forms['submit-to-google-sheet']
-    const msg=document.getElementById("msg")
-  
-    form.addEventListener('submit', e => {
-      e.preventDefault()
-      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            msg.innerHTML="message sent sucessfully"
-            setTimeout(function(){
-                msg.innerHTML=""
-            },5000)
-            form.reset()
-        })
-        .catch(error => console.error('Error!', error.message))
-    })
-  </script>
+
 </body>
 </html>

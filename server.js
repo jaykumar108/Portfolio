@@ -10,8 +10,7 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "Public")));
-
+app.use(express.static(path.join(__dirname, "public")));
 
 // DATABASE CONNECTION
 mongoose
@@ -57,11 +56,7 @@ app.get("/thank.html", (req, res) => {
   res.sendFile(path.join(__dirname, "views", "thank.html"));
 });
 
-app.get("/calculator", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "Calculator.html"));
-});
-
-app.post("/", async (req, res) => {
+app.post("/submit-form", async (req, res) => {
   const { name, email, mobile, message } = req.body;
   const newContact = new Contact({ name, email, mobile, message });
 
