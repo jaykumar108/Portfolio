@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -9,16 +10,24 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-     // DATABASE CONNECTION
-mongoose.connect('mongodb://127.0.0.1:27017/portfolioDB', {
+
+
+// DATABASE CONNECTION
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
 
 const db = mongoose.connection;
-db.once('open', () => {
-    console.log("MongoDB Connection Successful");
+
+db.on("error", (err) => {
+    console.error("❌ MongoDB Connection Error:", err);
 });
+
+db.once("open", () => {
+    console.log("✅ MongoDB Connection Successful (Atlas)");
+});
+
 
 //  DATABASE SCHEMA 
 
